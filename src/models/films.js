@@ -2,11 +2,15 @@ const Request = require('../helpers/request.js');
 const PubSub = require('../helpers/pub_sub.js');
 
 const Films = function () {
-  this.data = null;
+  this.data = [];
+  this.currentFilm = null;
 }
 
 Films.prototype.bindEvents = function () {
   this.getData();
+  PubSub.subscribe('SelectView:title-index', e => {
+    PubSub.publish('Films:film-details', this.filmDetails(e.detail))
+  })
 }
 
 Films.prototype.getData = function () {
@@ -27,6 +31,12 @@ Films.prototype.getData = function () {
 
 Films.prototype.getTitles = function (films) {
   return films.map(film => film.title).sort();
+}
+
+Films.prototype.filmDetails = function (index) {
+  this.currentFilm = this.data[index];
+  console.log(this.currentFilm);
+  return this.currentFilm; 
 }
 
 module.exports = Films;
