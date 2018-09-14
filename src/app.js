@@ -3,7 +3,6 @@ const SelectView = require('./views/select_view.js')
 const FilmView = require('./views/film_view.js')
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('JavaScript Loaded');
 
   const filmSelectElement = document.querySelector('#select-films');
   const filmSelect = new SelectView(filmSelectElement, 'Films:titles', 'SelectView:title-index');

@@ -7,7 +7,6 @@ const FilmView = function (element) {
 
 FilmView.prototype.bindEvents = function () {
   PubSub.subscribe('Films:film-details', e => {
-    // console.log(e.detail);
     this.element.innerHTML = '';
     const film = e.detail;
     createAppend('h2', film.title, this.element);

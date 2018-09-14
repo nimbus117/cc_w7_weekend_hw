@@ -5,7 +5,7 @@ const Request = function (url) {
 Request.prototype.get = function () {
   return fetch(this.url)
     .then(response => response.json())
-    .catch(error => {console.log(error)});
+    .catch(error => {console.error(error)});
 }
 
 module.exports = Request;

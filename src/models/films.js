@@ -2,7 +2,7 @@ const Request = require('../helpers/request.js');
 const PubSub = require('../helpers/pub_sub.js');
 
 const Films = function () {
-  this.data = [];
+  this.films = [];
   this.currentFilm = null;
 }
 
@@ -18,24 +18,19 @@ Films.prototype.getData = function () {
   const request = new Request(url);
   request.get()
     .then(data => {
-      this.data = data;
-      // console.log(this.data);
-      const titles = this.getTitles(this.data)
-      // console.log(titles);
-      PubSub.publish('Films:titles', titles);
+      this.films = data;
+      this.publishTitles()
     })
-    .catch(error => {
-      console.error(error)
-    });
+    .catch(error => console.error(error));
 }
 
-Films.prototype.getTitles = function (films) {
-  return films.map(film => film.title);
+Films.prototype.publishTitles = function () {
+  const titles = this.films.map(film => film.title);
+  PubSub.publish('Films:titles', titles);
 }
 
 Films.prototype.filmDetails = function (index) {
-  this.currentFilm = this.data[index];
-  // console.log(this.currentFilm);
+  this.currentFilm = this.films[index];
   return this.currentFilm; 
 }
 
