@@ -15,11 +15,18 @@ Films.prototype.getData = function () {
   request.get()
     .then(data => {
       this.data = data;
-      console.log(this.data);
+      // console.log(this.data);
+      const titles = this.getTitles(this.data)
+      // console.log(titles);
+      PubSub.publish('Fimls:titles', titles);
     })
     .catch(error => {
       console.error(error)
     });
+}
+
+Films.prototype.getTitles = function (films) {
+  return films.map(film => film.title).sort();
 }
 
 module.exports = Films;
