@@ -1,6 +1,6 @@
 const Films = require('./models/films.js')
-const FilmDetailsView = require('./views/film_view.js')
-const FilmChartView = require('./views/chart_view.js')
+const FilmDetailsView = require('./views/film_details_view.js')
+const FilmChartView = require('./views/film_chart_view.js')
 
 document.addEventListener('DOMContentLoaded', () => {
 
