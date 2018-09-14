@@ -1,38 +1,39 @@
 var Highcharts = require('highcharts');
+const PubSub = require('../helpers/pub_sub.js');
 
 // Load module after Highcharts is loaded
 require('highcharts/modules/exporting')(Highcharts);
 
-const FilmChart = function (element) {
+const ChartView = function (element) {
   this.element = element;
 }
 
-
-FilmChart.prototype.bindEvents = function () {
-
-  const filmChart = Highcharts.chart(this.element, {
-      chart: {
-          type: 'bar'
-      },
+ChartView.prototype.bindEvents = function () {
+  PubSub.subscribe('Films:score', e =>{
+    const filmChart = Highcharts.chart(this.element, {
       title: {
-          text: 'Fruit Consumption'
+        text: 'Rotten Tomatoes Scores'
       },
+      // subtitle: {
+      //   text: 'Subtitle?????'
+      // },
       xAxis: {
-          categories: ['Apples', 'Bananas', 'Oranges']
+        categories: e.detail.map(film => film.title)
       },
       yAxis: {
-          title: {
-              text: 'Fruit eaten'
-          }
+        title: {
+          text: 'Score'
+        },
+        max: 100
       },
       series: [{
-          name: 'Jane',
-          data: [1, 0, 4]
-      }, {
-          name: 'John',
-          data: [5, 7, 3]
+        name: 'score',
+        type: 'column',
+        data: e.detail.map(film => parseInt(film.rt_score)),
+        showInLegend: false,
       }]
-  });
+    });
+  })
 }
 
-module.exports = FilmChart;
+module.exports = ChartView;

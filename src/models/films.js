@@ -20,6 +20,7 @@ Films.prototype.getData = function () {
     .then(data => {
       this.films = data;
       this.publishTitles()
+      this.publishScore()
     })
     .catch(error => console.error(error));
 }
@@ -27,6 +28,13 @@ Films.prototype.getData = function () {
 Films.prototype.publishTitles = function () {
   const titles = this.films.map(film => film.title);
   PubSub.publish('Films:titles', titles);
+}
+
+Films.prototype.publishScore = function () {
+  const titles = this.films.map(film => {
+    return {title: film.title, rt_score: film.rt_score}
+  });
+  PubSub.publish('Films:score', titles);
 }
 
 Films.prototype.filmDetails = function (index) {
