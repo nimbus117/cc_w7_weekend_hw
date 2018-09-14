@@ -18,7 +18,9 @@ Films.prototype.getData = function () {
   const request = new Request(url);
   request.get()
     .then(data => {
-      this.films = data;
+      this.films = data.sort((a, b) => {
+        return a.release_date - b.release_date
+      });
       this.publishTitles()
       this.publishScore()
     })
