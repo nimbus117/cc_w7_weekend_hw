@@ -18,7 +18,7 @@ Films.prototype.getData = function () {
       // console.log(this.data);
       const titles = this.getTitles(this.data)
       // console.log(titles);
-      PubSub.publish('Fimls:titles', titles);
+      PubSub.publish('Films:titles', titles);
     })
     .catch(error => {
       console.error(error)
