@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('JavaScript Loaded');
 
   const filmElement = document.querySelector('#select-films')
-  const filmSelect = new SelectView(filmElement, 'Films:titles');
+  const filmSelect = new SelectView(filmElement, 'Films:titles', 'SelectView:title-index');
   filmSelect.bindEvents();
 
   const films = new Films();
