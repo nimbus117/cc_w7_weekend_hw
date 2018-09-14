@@ -30,12 +30,12 @@ Films.prototype.getData = function () {
 }
 
 Films.prototype.getTitles = function (films) {
-  return films.map(film => film.title).sort();
+  return films.map(film => film.title);
 }
 
 Films.prototype.filmDetails = function (index) {
   this.currentFilm = this.data[index];
-  console.log(this.currentFilm);
+  // console.log(this.currentFilm);
   return this.currentFilm; 
 }
 
