@@ -3,13 +3,12 @@ const PubSub = require('../helpers/pub_sub.js');
 
 const Films = function () {
   this.films = [];
-  this.currentFilm = null;
 }
 
 Films.prototype.bindEvents = function () {
   this.getData();
-  PubSub.subscribe('ChartView:title-index', e => {
-    PubSub.publish('Films:film-details', this.filmDetails(e.detail))
+  PubSub.subscribe('FilmChartView:film-index', e => {
+    PubSub.publish('Films:film-details', this.films[e.detail])
   })
 }
 
@@ -25,15 +24,10 @@ Films.prototype.getData = function () {
 }
 
 Films.prototype.publishScore = function () {
-  const titles = this.films.map(film => {
+  const scores = this.films.map(film => {
     return {title: film.title, rt_score: film.rt_score}
   });
-  PubSub.publish('Films:score', titles);
-}
-
-Films.prototype.filmDetails = function (index) {
-  this.currentFilm = this.films[index];
-  return this.currentFilm; 
+  PubSub.publish('Films:scores', scores);
 }
 
 module.exports = Films;
