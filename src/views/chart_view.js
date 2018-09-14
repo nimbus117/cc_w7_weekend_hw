@@ -9,6 +9,10 @@ const ChartView = function (element) {
 ChartView.prototype.bindEvents = function () {
   PubSub.subscribe('Films:score', e => {
     const filmChart = Highcharts.chart(this.element, {
+      chart: {
+        borderWidth: 1,
+        backgroundColor: '#ECC27C'
+      },
       title: {
         text: 'Rotten Tomatoes Scores'
       },
