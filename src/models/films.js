@@ -8,7 +8,7 @@ const Films = function () {
 
 Films.prototype.bindEvents = function () {
   this.getData();
-  PubSub.subscribe('SelectView:title-index', e => {
+  PubSub.subscribe('ChartView:title-index', e => {
     PubSub.publish('Films:film-details', this.filmDetails(e.detail))
   })
 }
@@ -18,18 +18,10 @@ Films.prototype.getData = function () {
   const request = new Request(url);
   request.get()
     .then(data => {
-      this.films = data.sort((a, b) => {
-        return a.release_date - b.release_date
-      });
-      this.publishTitles()
+      this.films = data;
       this.publishScore()
     })
     .catch(error => console.error(error));
-}
-
-Films.prototype.publishTitles = function () {
-  const titles = this.films.map(film => film.title);
-  PubSub.publish('Films:titles', titles);
 }
 
 Films.prototype.publishScore = function () {

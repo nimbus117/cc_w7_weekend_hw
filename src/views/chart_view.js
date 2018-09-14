@@ -1,7 +1,5 @@
-var Highcharts = require('highcharts');
 const PubSub = require('../helpers/pub_sub.js');
-
-// Load module after Highcharts is loaded
+const Highcharts = require('highcharts');
 require('highcharts/modules/exporting')(Highcharts);
 
 const ChartView = function (element) {
@@ -9,14 +7,11 @@ const ChartView = function (element) {
 }
 
 ChartView.prototype.bindEvents = function () {
-  PubSub.subscribe('Films:score', e =>{
+  PubSub.subscribe('Films:score', e => {
     const filmChart = Highcharts.chart(this.element, {
       title: {
         text: 'Rotten Tomatoes Scores'
       },
-      // subtitle: {
-      //   text: 'Subtitle?????'
-      // },
       xAxis: {
         categories: e.detail.map(film => film.title)
       },
@@ -31,7 +26,17 @@ ChartView.prototype.bindEvents = function () {
         type: 'column',
         data: e.detail.map(film => parseInt(film.rt_score)),
         showInLegend: false,
-      }]
+      }],
+      plotOptions: {
+        series: {
+          cursor: 'pointer',
+          events: {
+            click: function (event) {
+              PubSub.publish('ChartView:title-index', event.point.index);
+            }
+          }
+        }
+      },
     });
   })
 }
