@@ -2,6 +2,7 @@ const Nav = require('./models/nav.js');
 const NavView = require('./views/nav_view.js');
 const FilmDetailsView = require('./views/film_details_view.js');
 const FilmChartView = require('./views/film_chart_view.js');
+const DirectorsChartView = require('./views/directors_chart_view.js')
 
 document.addEventListener('DOMContentLoaded', () => {
   const navElement = document.querySelector('#nav-list');
@@ -20,4 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const filmDetailsView = new FilmDetailsView(detailsElement);
   filmDetailsView.bindEvents();
 
+  const directorsChartView = new DirectorsChartView(mainElement);
+  directorsChartView.bindEvents()
 })

@@ -3,6 +3,7 @@ const PubSub = require('../helpers/pub_sub.js');
 
 const Films = function () {
   this.films = [];
+  this.directors = [];
 }
 
 Films.prototype.bindEvents = function () {
@@ -18,8 +19,21 @@ Films.prototype.getData = function () {
   request.get()
     .then(data => {
       this.films = data;
+      this.filmsByDirector();
     })
     .catch(error => console.error(error));
+}
+
+Films.prototype.filmsByDirector = function () {
+  this.directors = this.films
+    .map(film => film.director)
+    .filter((director, index, directors) => directors.indexOf(director) === index)
+    .map(director => {
+      return {
+        name: director,
+        films: this.films.filter(film => film.director === director)
+      }
+    });
 }
 
 Films.prototype.publishScores = function () {
@@ -30,9 +44,13 @@ Films.prototype.publishScores = function () {
 }
 
 Films.prototype.publishDirectors = function () {
-  const directors = this.films
-    .map(film => film.director)
-    .filter((director, index, directors) => directors.indexOf(director) === index);
+  const directors = this.directors
+    .map(director => {
+      return {
+        name: director.name,
+        y: director.films.length
+      }
+    });
   PubSub.publish('Films:directors', directors);
 }
 

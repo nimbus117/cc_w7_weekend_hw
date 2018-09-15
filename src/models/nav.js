@@ -1,6 +1,5 @@
 const PubSub = require('../helpers/pub_sub.js');
 const Films = require('./films.js');
-const DirectorsView = require('../views/directors_view.js')
 
 const Nav = function (mainElement, detailsElement) {
   this.mainElement = mainElement;
@@ -10,8 +9,6 @@ const Nav = function (mainElement, detailsElement) {
 
 Nav.prototype.bindEvents = function () {
   this.films.bindEvents();
-  const directorsView = new DirectorsView(this.mainElement);
-  directorsView.bindEvents()
   PubSub.subscribe('NavView:navigation', e => {
     switch (e.detail) {
       case 'Films':
