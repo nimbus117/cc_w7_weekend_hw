@@ -7,9 +7,7 @@ const DirectorsChartView = function (element) {
 }
 
 DirectorsChartView.prototype.bindEvents = function () {
-  PubSub.subscribe('Films:directors', e => {
-    this.render(e.detail);
-  })
+  PubSub.subscribe('Films:directors', e => this.render(e.detail));
 }
 
 DirectorsChartView.prototype.render = function (directors) {

@@ -10,8 +10,9 @@ nav {
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.3em;
   padding: 10px 0;
+  text-decoration: underline;
 }
 
 ul {
@@ -26,7 +27,7 @@ ul {
 }
 
 #nav-list {
-  padding-top: 55px;
+  padding-top: 65px;
   padding-left: 40px;
 }
 

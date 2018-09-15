@@ -7,7 +7,7 @@ const FilmChartView = function (element) {
 }
 
 FilmChartView.prototype.bindEvents = function () {
-  PubSub.subscribe('Films:scores', e => this.render(e.detail))
+  PubSub.subscribe('Films:scores', e => this.render(e.detail));
 }
 
 FilmChartView.prototype.render = function (scores) {
@@ -46,4 +46,5 @@ FilmChartView.prototype.render = function (scores) {
     },
   });
 }
+
 module.exports = FilmChartView;

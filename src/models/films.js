@@ -11,6 +11,9 @@ Films.prototype.bindEvents = function () {
   PubSub.subscribe('FilmChartView:film-index', e => {
     PubSub.publish('Films:film-details', this.films[e.detail])
   })
+  PubSub.subscribe('DirectorsChartView:director-index', e => {
+    PubSub.publish('Films:directors-films', this.directors[e.detail])
+  })
 }
 
 Films.prototype.getData = function () {

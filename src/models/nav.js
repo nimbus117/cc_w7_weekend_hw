@@ -15,7 +15,8 @@ Nav.prototype.bindEvents = function () {
         this.renderFilms(); break;
       case 'Directors':
         this.renderDirectors(); break;
-      case 'Characters': break;
+      case 'Characters':
+        break;
     }
   })
 }

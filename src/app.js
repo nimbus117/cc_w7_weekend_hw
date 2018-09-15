@@ -1,8 +1,9 @@
 const Nav = require('./models/nav.js');
 const NavView = require('./views/nav_view.js');
-const FilmDetailsView = require('./views/film_details_view.js');
-const FilmChartView = require('./views/film_chart_view.js');
+const FilmsDetailView = require('./views/films_detail_view.js');
+const FilmsChartView = require('./views/films_chart_view.js');
 const DirectorsChartView = require('./views/directors_chart_view.js')
+const DirectorsFilmsView = require('./views/directors_films_view.js')
 
 document.addEventListener('DOMContentLoaded', () => {
   const navElement = document.querySelector('#nav-list');
@@ -15,12 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const navView = new NavView(navElement);
   navView.bindEvents();
 
-  const filmChartView = new FilmChartView(mainElement);
-  filmChartView.bindEvents();
+  const filmsChartView = new FilmsChartView(mainElement);
+  filmsChartView.bindEvents();
 
-  const filmDetailsView = new FilmDetailsView(detailsElement);
-  filmDetailsView.bindEvents();
+  const filmsDetailView = new FilmsDetailView(detailsElement);
+  filmsDetailView.bindEvents();
 
   const directorsChartView = new DirectorsChartView(mainElement);
   directorsChartView.bindEvents()
+
+  const directorsFilmsView = new DirectorsFilmsView(detailsElement);
+  directorsFilmsView.bindEvents()
 })
