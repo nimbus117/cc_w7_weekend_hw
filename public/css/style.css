@@ -1,8 +1,33 @@
 body {
   background-color: #9FD0FF;
+  padding: 2em;
 }
 
-img {
-  display: block;
-  margin: 0 auto 10px auto;
+nav {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
+
+#nav-list, .nav-list-item {
+  display: inline;
+  font-size: 1.5em;
+}
+
+#nav-list {
+  padding-top: 55px;
+  padding-left: 40px;
+}
+
+.nav-list-item {
+  padding: 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+.nav-list-item:hover {
+  background-color: #44729F;
+  /* color: #9FD0FF; */
+  border-radius: 5px;
+}
+
