@@ -1,11 +1,22 @@
 body {
   background-color: #9FD0FF;
-  padding: 2em;
+  padding: 10px 20px;
 }
 
 nav {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.2em;
+  padding: 10px 0;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 40px;
   margin-bottom: 10px;
 }
 
@@ -25,9 +36,7 @@ nav {
   cursor: pointer;
 }
 
-.nav-list-item:hover {
+.selected, .nav-list-item:hover {
   background-color: #44729F;
-  /* color: #9FD0FF; */
   border-radius: 5px;
 }
-
