@@ -18,16 +18,22 @@ Films.prototype.getData = function () {
   request.get()
     .then(data => {
       this.films = data;
-      this.publishScore()
     })
     .catch(error => console.error(error));
 }
 
-Films.prototype.publishScore = function () {
+Films.prototype.publishScores = function () {
   const scores = this.films.map(film => {
     return {title: film.title, rt_score: film.rt_score}
   });
   PubSub.publish('Films:scores', scores);
+}
+
+Films.prototype.publishDirectors = function () {
+  const directors = this.films
+    .map(film => film.director)
+    .filter((director, index, directors) => directors.indexOf(director) === index);
+  PubSub.publish('Films:directors', directors);
 }
 
 module.exports = Films;

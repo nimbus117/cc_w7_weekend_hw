@@ -36,7 +36,7 @@ ul {
   cursor: pointer;
 }
 
-.selected, .nav-list-item:hover {
+.nav-list-item:hover {
   background-color: #44729F;
   border-radius: 5px;
 }
