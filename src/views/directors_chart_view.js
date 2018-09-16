@@ -19,14 +19,23 @@ DirectorsChartView.prototype.render = function (directors) {
     title: {
       text: 'Films By Director'
     },
+    xAxis: {
+      categories: directors.map(d => d.name)
+    },
+    yAxis: {
+      title: {
+        text: 'Number of Films'
+      },
+      tickInterval: 1
+    },
     series: [{
       name: 'number of films',
-      type: 'pie',
+      type: 'bar',
       data: directors,
       showInLegend: false,
     }],
     plotOptions: {
-      pie: {
+      series: {
         cursor: 'pointer',
         events: {
           click: function (event) {

@@ -17,7 +17,7 @@ FilmChartView.prototype.render = function (scores) {
       backgroundColor: '#ECC27C'
     },
     title: {
-      text: 'Rotten Tomatoes Scores'
+      text: 'Rotten Tomatoes Score'
     },
     xAxis: {
       categories: scores.map(film => film.title)

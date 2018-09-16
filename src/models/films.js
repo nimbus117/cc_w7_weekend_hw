@@ -36,7 +36,8 @@ Films.prototype.filmsByDirector = function () {
         name: director,
         films: this.films.filter(film => film.director === director)
       }
-    });
+    })
+    .sort((a,b) => b.films.length - a.films.length);
 }
 
 Films.prototype.publishScores = function () {
