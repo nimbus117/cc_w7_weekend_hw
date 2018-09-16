@@ -1,14 +1,17 @@
 const PubSub = require('../helpers/pub_sub.js');
 const Films = require('./films.js');
+const Characters = require('./characters.js');
 
 const Nav = function (mainElement, detailsElement) {
   this.mainElement = mainElement;
   this.detailsElement = detailsElement;
   this.films = new Films();
+  this.characters = new Characters();
 }
 
 Nav.prototype.bindEvents = function () {
   this.films.bindEvents();
+  this.characters.bindEvents();
   PubSub.subscribe('NavView:navigation', e => {
     switch (e.detail) {
       case 'Films':
@@ -16,9 +19,14 @@ Nav.prototype.bindEvents = function () {
       case 'Directors':
         this.renderDirectors(); break;
       case 'Characters':
-        break;
+        this.renderCharacters(); break;
     }
   })
+}
+
+Nav.prototype.renderCharacters = function () {
+  this.clearElements();
+  this.characters.publishCharacterTypes()
 }
 
 Nav.prototype.renderDirectors = function () {

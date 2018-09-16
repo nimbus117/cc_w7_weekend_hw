@@ -7,6 +7,7 @@ nav {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  justify-content: center;
 }
 
 h2 {
@@ -38,6 +39,12 @@ ul {
 }
 
 .nav-list-item:hover {
-  background-color: #44729F;
-  border-radius: 5px;
+  /* background-color: #44729F; */
+  /* border-radius: 5px; */
+  text-decoration: underline;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
