@@ -10,7 +10,9 @@ const Characters = function () {
 Characters.prototype.bindEvents = function () {
   this.getPeople();
   this.getSpecies();
-  PubSub.subscribe('CharactersChartView:type', e => this.publishCharacters(e.detail));
+  PubSub.subscribe('CharactersChartView:type', e => {
+    PubSub.publish('Characters:characters', this.filterCharacters(e.detail))
+  });
 }
 
 Characters.prototype.getPeople = function () {
@@ -45,10 +47,11 @@ Characters.prototype.getCharacters = function () {
     return {
       name: c.name,
       gender: c.gender,
-      species: this.getCharacterSpecies(c.species)
+      age: c.age,
+      species: this.getCharacterSpecies(c.species),
     }
   })
-  // console.log(this.characters);
+  console.log(this.characters);
 }
 
 Characters.prototype.getTypesCount = function (property) {
@@ -67,8 +70,10 @@ Characters.prototype.publishCharacterTypes = function () {
   PubSub.publish('Characters:types', {species: speciesArr, gender: genderArr})
 }
 
-Characters.prototype.publishCharacters = function (payload) {
-  console.log(this.characters.filter(c => c[payload.type] === payload.value))
+Characters.prototype.filterCharacters = function (payload) {
+  const characters = this.characters.filter(c => c[payload.type] === payload.value);
+  console.log(characters);
+  return characters;
 }
 
 module.exports = Characters;
